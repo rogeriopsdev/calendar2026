@@ -1,0 +1,10 @@
+{% extends 'calendario/base.html' %}
+{% block conteudo %}
+<form method="post">
+    {%csrf_token %}
+    deseja deletar ? {{ evento.nome_evento }}
+    <input type="submit" value="Excluir" class="btn btn-danger">
+</form>
+<a href="{% url 'new_evento' %}" class="btn btn-info">Cancelar </a>
+
+{% endblock conteudo %}

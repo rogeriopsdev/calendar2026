@@ -1,0 +1,25 @@
+{% extends 'calendario/base.html' %}
+{% block conteudo %}
+<h1 class="text-info">Gerador de Calendários</h1>
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Enviar" class="btn btn-success">
+</form>
+<div class="row">
+
+{% for tipo in tipos %}
+
+    <div class="col-sm-12 col-md-6 col-lg-3">
+    <div class="card ">
+        <div>{{ tipo.id_tipo }}</div>
+        <div>{{ tipo.nome_tipo }}</div>
+    </div>
+
+    </div><!-- comentário -->
+
+{% endfor %}
+</div>
+{% endblock conteudo %}
+
+

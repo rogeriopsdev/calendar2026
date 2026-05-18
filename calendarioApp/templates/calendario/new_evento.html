@@ -1,0 +1,26 @@
+{% extends 'calendario/base.html' %}
+{% block conteudo %}
+<h1 class="text-info">Gerador de Calendários</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form1 }}
+    <input type="submit" value="Enviar" class="btn btn-success">
+</form>
+
+<div class="row">
+{% for evento in eventos %}
+    <div class="col-sm-12 col-md-6 col-lg-3">
+    <div class="card">
+        <div>{{ evento.id_evento }}</div>
+        <div>{{ evento.data_evento }}</div>
+        <div>{{ evento.nome_evento }}</div>
+        <div>{{ evento.id_tipo }}</div>
+        <a href="{% url 'editar_evento' evento.id_evento %}" class="btn btn-warning">Editar</a>
+        <a href="{% url 'delete_evento' evento.id_evento %}" class="btn btn-danger">Delete</a>
+    </div>
+    </div><!-- comentário -->
+{% endfor %}
+</div>
+
+{% endblock conteudo %}

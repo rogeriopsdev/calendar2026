@@ -1,0 +1,26 @@
+{% extends 'calendario/base.html' %}
+{% block conteudo %}
+<h1 class="text-info">Editar Calendários</h1>
+
+<form method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form }}
+    <input type="submit" value="Enviar" class="btn btn-success">
+</form>
+
+<div class="row">
+{% for evento in eventos %}
+    <div class="col-sm-12 col-md-6 col-lg-3">
+    <div class="card">
+        <div>{{ evento.id_evento }}</div>
+        <div>{{ evento.data_evento }}</div>
+        <div>{{ evento.nome_evento }}</div>
+        <div>{{ evento.id_tipo }}</div>
+
+    </div>
+
+    </div><!-- comentário -->
+{% endfor %}
+</div>
+
+{% endblock conteudo %}
