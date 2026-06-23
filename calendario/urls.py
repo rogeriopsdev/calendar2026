@@ -21,7 +21,7 @@ from calendarioApp.views import index, new_evento, editar_evento, delete_evento,
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('index/', index, name='index'),
-    path('', home, name='home'),
+    path('calendario/', home, name='calendario'),
     path('new_evento/', new_evento, name='new_evento'),
     path('editar_evento/<str:id>', editar_evento, name='editar_evento'),
     path('delete_evento/<str:id>', delete_evento, name='delete_evento'),

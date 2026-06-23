@@ -4,7 +4,8 @@ from calendarioApp.models import Tipo, Evento
 
 # Create your views here.
 def home(request):
-    return render(request, 'calendario/home.html')
+    eventos = Evento.objects.all()
+    return render(request, 'calendario/home.html', {'eventos':eventos})
 
 
 #-------------------tipo------------------------------

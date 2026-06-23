@@ -1,25 +1,38 @@
 {% extends 'calendario/base.html' %}
 {% block conteudo %}
+     {% load crispy_forms_tags %}
 <h1 class="text-info">Editar Calendários</h1>
+ {% load crispy_forms_tags %}
+    {% load widget_tweaks %}
+<form method="POST" enctype="multipart/form-data" class="row mb-5 bg-light p-4 rounded-end-4">
+            {% csrf_token %}
 
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Enviar" class="btn btn-success">
-</form>
+            <div class="col-4"><label for="data" class="form-label"> Data
+                Evento </label>{% render_field form.data_evento type='date' class='form-control' id='data' %}</div>
+
+            <div class="col-4"><label for="nome" class="form-label"> Nome
+                Evento</label>{% render_field form.nome_evento type='text' class='form-control' id='nome' %}</div>
+
+            <div class="col-4"><label for="tipo" class="form-label"> Tipo
+                Evento</label>{% render_field form.id_tipo class='form-control' id='tipo' %}</div>
+            <input type="submit" value="Editar" class="btn btn-warning mt-4">
+        </form>
 
 <div class="row">
 {% for evento in eventos %}
-    <div class="col-sm-12 col-md-6 col-lg-3">
-    <div class="card">
-        <div>{{ evento.id_evento }}</div>
-        <div>{{ evento.data_evento }}</div>
-        <div>{{ evento.nome_evento }}</div>
-        <div>{{ evento.id_tipo }}</div>
+   <div class="col-sm-12 col-md-6 col-lg-3 mb-2">
+                <div class="card p-2 border-danger">
+                    <div class="bg-danger rounded-5 text-light col-lg-2 mb-1"
+                         style="text-align: center">{{ evento.id_evento }}</div>
+                    <div>{{ evento.data_evento }}</div>
+                    <div style="background: rgb(0,153,0);padding: 2px;text-align: center; border-radius: 50px;">{{ evento.nome_evento }}</div>
+                    <div>{{ evento.id_tipo }}</div>
+                    <div class="row" style="justify-content: center;">
 
-    </div>
 
-    </div><!-- comentário -->
+                    </div>
+                </div>
+            </div><!-- comentário -->
 {% endfor %}
 </div>
 

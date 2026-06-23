@@ -1,25 +1,55 @@
 {% extends 'calendario/base.html' %}
 {% block conteudo %}
-<h1 class="text-info">Gerador de Calendários</h1>
-<form method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form }}
-    <input type="submit" value="Enviar" class="btn btn-success">
-</form>
-<div class="row">
+    {% load crispy_forms_tags %}
+    {% load widget_tweaks %}
+    <h1 class="text-dark mt-5 mb-5">Tipo de Evento</h1>
+    <form method="POST" enctype="multipart/form-data" class="input-group mt-5 mb-5 row">
+        {% csrf_token %}
 
-{% for tipo in tipos %}
+        <div class="col-6"><label for="tipo" class="form-label"> Tipo Evento </label>{% render_field form.nome_tipo type='text' class='form-control' id='tipo' %}</div>
+ <input type="submit" value="Enviar" class="btn btn-success mt-4">
+    </form>
+    <div class="row">
 
-    <div class="col-sm-12 col-md-6 col-lg-3">
-    <div class="card ">
-        <div>{{ tipo.id_tipo }}</div>
-        <div>{{ tipo.nome_tipo }}</div>
+        <div class="row">
+            {% for tipo in tipos %}
+                <div class="col-sm-12 col-md-6 col-lg-3 mb-2">
+                    <div class="card p-2 border-danger">
+                        <div class="bg-danger rounded-5 text-light col-lg-2 mb-1"
+                             style="text-align: center">{{ tipo.id_tipo }}</div>
+                        <div>{{ tipo.nome_tipo }}</div>
+
+                        <div class="row" style="justify-content: center;">
+
+                            <a style="margin-right: 1px; margin-left: 1px;"
+                               href="{% url 'editar_evento' tipo.id_tipo %}"
+                               class="btn btn-outline-warning col-md-6 col-lg-4 col-sm-12">
+
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-pencil-fill" viewBox="0 0 16 16">
+                                    <path d="M12.854.146a.5.5 0 0 0-.707 0L10.5 1.793 14.207 5.5l1.647-1.646a.5.5 0 0 0 0-.708zm.646 6.061L9.793 2.5 3.293 9H3.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.207zm-7.468 7.468A.5.5 0 0 1 6 13.5V13h-.5a.5.5 0 0 1-.5-.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.5-.5V10h-.5a.5.5 0 0 1-.175-.032l-.179.178a.5.5 0 0 0-.11.168l-2 5a.5.5 0 0 0 .65.65l5-2a.5.5 0 0 0 .168-.11z"/>
+                                </svg>
+                            </a>
+
+
+                            <a style="margin-right: 1px; margin-left: 1px;"
+                               href="{% url 'delete_evento' tipo.id_tipo %}"
+                               class="btn btn-outline-danger col-md-6 col-lg-4 col-sm-12">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-calendar-x" viewBox="0 0 16 16">
+                                    <path d="M6.146 7.146a.5.5 0 0 1 .708 0L8 8.293l1.146-1.147a.5.5 0 1 1 .708.708L8.707 9l1.147 1.146a.5.5 0 0 1-.708.708L8 9.707l-1.146 1.147a.5.5 0 0 1-.708-.708L7.293 9 6.146 7.854a.5.5 0 0 1 0-.708"/>
+                                    <path d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5M1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4z"/>
+                                </svg>
+                            </a>
+
+                        </div>
+                    </div>
+                </div><!-- comentário -->
+            {% endfor %}
+        </div>
+
+
     </div>
-
-    </div><!-- comentário -->
-
-{% endfor %}
-</div>
 {% endblock conteudo %}
 
 
